@@ -1,0 +1,52 @@
+/**
+ * Global styles.
+ *
+ * Everything visual comes from Tailwind utility classes so the app never needs
+ * an external stylesheet. The only hand-written CSS is base resets, focus
+ * rings, and the reduced-motion preference.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    @apply dark:bg-slate-950 dark:text-slate-100;
+  }
+
+  /* Keyboard users always get a visible focus ring. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-indigo-500 ring-offset-2;
+    @apply ring-offset-slate-50 dark:ring-offset-slate-950;
+  }
+
+  /* Long message bodies keep their line breaks and scroll instead of growing. */
+  .scamlens-scroll {
+    scrollbar-width: thin;
+  }
+}
+
+/**
+ * Honour `prefers-reduced-motion` globally: no smooth scrolling, no animations.
+ * The engine's highlight cross-scroll reads this same preference.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
